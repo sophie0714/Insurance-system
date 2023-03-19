@@ -60,11 +60,26 @@ public class InsuranceSystem {
       }
     }
 
+    //Determine if age is an integer or not
+    //Initialise isInteger to true
+    boolean isInteger = true;
+
+    // Check if age is numerical integer or not with ascii value of each character
+    for (int i=0; i<age.length(); i++){
+      char digit = age.charAt(i);
+      // 48 ascii '0', 67 ascii '9'
+      if ((int)digit < 48 || (int)digit > 67){
+        // Age is not an integer
+        isInteger = false;
+      }
+    }
+    
+
     if (userName.length()<3){ 
       // Check if the username is shorter than 3, then print error message
       MessageCli.INVALID_USERNAME_TOO_SHORT.printMessage(userName);
 
-    }else if (Integer.valueOf(age) < 0){
+    }else if (isInteger == false || Integer.valueOf(age) < 0){
       // Check if the age is not a positive integer, then print error message
       MessageCli.INVALID_AGE.printMessage(age,userName);
 
