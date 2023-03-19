@@ -12,7 +12,19 @@ public class InsuranceSystem {
   }
 
   public void printDatabase() {
-    // TODO: Complete this method.
+
+    // When there is no clients in the listOfClients
+    if (listOfClients.size() == 0){
+      MessageCli.PRINT_DB_POLICY_COUNT.printMessage("0", "s", ".");
+
+    // When there is only one client's profile in the listOfClients
+    }else if (listOfClients.size()== 1){
+      MessageCli.PRINT_DB_POLICY_COUNT.printMessage("1","",":");
+
+    // When there are more than two clients' profiles in the listOfClients
+    }else{
+      MessageCli.PRINT_DB_POLICY_COUNT.printMessage(Integer.toString(listOfClients.size()),"s",":");
+    }
   }
 
   public void createNewProfile(String userName, String age) {
@@ -32,7 +44,7 @@ public class InsuranceSystem {
        // Store a typed profile of a client in the array list
       Client c1 = new Client(userName, Integer.valueOf(age));
       listOfClients.add(c1);
-      
+
       // Print message of successful profile creation
       MessageCli.PROFILE_CREATED.printMessage(userName,age);
     }
