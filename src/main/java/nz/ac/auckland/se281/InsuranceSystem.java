@@ -45,6 +45,21 @@ public class InsuranceSystem {
     // Capitalise the first letter and decapitalise the rest of letters
     userName = userName.substring(0,1).toUpperCase() + userName.substring(1).toLowerCase();
 
+    // Determine if a name is unique or not
+    // Initialise alreadyExist to false
+    boolean alreadyExist = false;
+
+    // Check if newly typed name is alread in the database
+    for (int i=0; i<listOfClients.size(); i++){
+      Client aClient = listOfClients.get(i);
+      String aClientName = aClient.getName();
+
+      // If exist, alreadyExist becomes true, meaning the name is not unique
+      if (userName.equals(aClientName)){
+        alreadyExist = true;
+      }
+    }
+
     if (userName.length()<3){ 
       // Check if the username is shorter than 3, then print error message
       MessageCli.INVALID_USERNAME_TOO_SHORT.printMessage(userName);
@@ -52,6 +67,10 @@ public class InsuranceSystem {
     }else if (Integer.valueOf(age) < 0){
       // Check if the age is not a positive integer, then print error message
       MessageCli.INVALID_AGE.printMessage(age,userName);
+
+    }else if(alreadyExist){
+      // Check if the name is already in the database, then print error message
+      MessageCli.INVALID_USERNAME_NOT_UNIQUE.printMessage(userName);
 
     }else{
        // Store a typed profile of a client in the array list
