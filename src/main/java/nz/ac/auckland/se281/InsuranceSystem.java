@@ -33,8 +33,7 @@ public class InsuranceSystem {
       Client aclient = listOfClients.get(i);
       String aclientName = aclient.getName();
       String aclientAge = aclient.getAge();
-      System.out.print((i + 1) + ": ");
-      System.out.println(aclientName + ", " + aclientAge);
+      MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(Integer.toString(i+1), aclientName, aclientAge);
     }
   }
 
