@@ -65,7 +65,7 @@ public class InsuranceSystem {
     // Check if age is numerical integer or not with ascii value of each character
     for (int i = 0; i < age.length(); i++) {
       char digit = age.charAt(i);
-      // 48 ascii '0', 67 ascii '9'
+      // 48 ascii '0', 57 ascii '9'
       if ((int) digit < 48 || (int) digit > 57) {
         // Age is not an integer
         isInteger = false;
