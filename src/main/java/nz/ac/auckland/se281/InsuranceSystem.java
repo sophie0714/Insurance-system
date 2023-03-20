@@ -72,6 +72,11 @@ public class InsuranceSystem {
       }
     }
 
+    // If age is a positive integer and has leading zeros, remove them
+    if (isPosInt) {
+      age = Integer.toString(Integer.valueOf(age));
+    }
+
     if (userName.length() < 3) {
       // Check if the username is shorter than 3, then print error message
       MessageCli.INVALID_USERNAME_TOO_SHORT.printMessage(userName);
