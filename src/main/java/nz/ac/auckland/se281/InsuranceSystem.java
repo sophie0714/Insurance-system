@@ -58,17 +58,17 @@ public class InsuranceSystem {
       }
     }
 
-    // Determine if age is an integer or not
-    // Initialise isInteger to true
-    boolean isInteger = true;
+    // Determine if age is a positive integer
+    // Assume age is a positive integer at first
+    boolean isPosInt = true;
 
-    // Check if age is numerical integer or not with ascii value of each character
+    // Check if age consists of only numbers (not a negative sign or dot)
     for (int i = 0; i < age.length(); i++) {
       char digit = age.charAt(i);
       // 48 ascii '0', 57 ascii '9'
       if ((int) digit < 48 || (int) digit > 57) {
-        // Age is not an integer
-        isInteger = false;
+        // Age is not a positive number
+        isPosInt = false;
       }
     }
 
@@ -76,7 +76,7 @@ public class InsuranceSystem {
       // Check if the username is shorter than 3, then print error message
       MessageCli.INVALID_USERNAME_TOO_SHORT.printMessage(userName);
 
-    } else if (isInteger == false || Integer.valueOf(age) < 0) {
+    } else if (isPosInt == false) {
       // Check if the age is not a positive integer, then print error message
       MessageCli.INVALID_AGE.printMessage(age, userName);
 
