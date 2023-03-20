@@ -30,9 +30,9 @@ public class InsuranceSystem {
 
     // Print all existing clients' profiles in database
     for (int i = 0; i < listOfClients.size(); i++) {
-      Client aClient = listOfClients.get(i);
-      String aClientName = aClient.getName();
-      String aClientAge = aClient.getAge();
+      Client aclient = listOfClients.get(i);
+      String aClientName = aclient.getName();
+      String aClientAge = aclient.getAge();
       System.out.print((i + 1) + ": ");
       System.out.println(aClientName + ", " + aClientAge);
     }
@@ -49,8 +49,8 @@ public class InsuranceSystem {
 
     // Check if newly typed name is alread in the database
     for (int i = 0; i < listOfClients.size(); i++) {
-      Client aClient = listOfClients.get(i);
-      String aClientName = aClient.getName();
+      Client aclient = listOfClients.get(i);
+      String aClientName = aclient.getName();
 
       // If exist, alreadyExist becomes true, meaning the name is not unique
       if (userName.equals(aClientName)) {
