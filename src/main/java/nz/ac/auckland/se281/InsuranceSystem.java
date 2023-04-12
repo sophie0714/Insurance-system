@@ -122,6 +122,7 @@ public class InsuranceSystem {
       String aclientName = aclient.getName();
 
       if (userName.equals(aclientName)) {
+        unloadProfile();
         MessageCli.PROFILE_LOADED.printMessage(userName);
         loadedProfile = aclient;
         return;
