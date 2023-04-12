@@ -8,6 +8,8 @@ public class InsuranceSystem {
   // Create an array list where all clients profiles are stored
   public ArrayList<Client> listOfClients = new ArrayList<>();
 
+  public Client loadedProfile;
+
   public InsuranceSystem() {
     // Only this constructor can be used (if you need to initialise fields).
   }
@@ -33,8 +35,12 @@ public class InsuranceSystem {
       Client aclient = listOfClients.get(i);
       String aclientName = aclient.getName();
       String aclientAge = aclient.getAge();
-      MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(
-          Integer.toString(i + 1), aclientName, aclientAge);
+      if (loadedProfile != null && loadedProfile.equals(aclient)){
+        MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage("*** ", Integer.toString(i+1), aclientName, aclientAge);
+      }else{
+        MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(
+            Integer.toString(i + 1), aclientName, aclientAge);
+      }
     }
   }
 
@@ -100,7 +106,22 @@ public class InsuranceSystem {
   }
 
   public void loadProfile(String userName) {
-    // TODO: Complete this method.
+    
+    // Capitalise the first letter and decapitalise the rest of letters
+    userName = userName.substring(0, 1).toUpperCase() + userName.substring(1).toLowerCase();
+    
+    // Check if a profile to load is in the database or not
+    for (int i = 0; i < listOfClients.size(); i++) {
+      Client aclient = listOfClients.get(i);
+      String aclientName = aclient.getName();
+
+      if (userName.equals(aclientName)) {
+        MessageCli.PROFILE_LOADED.printMessage(userName);
+        loadedProfile = aclient;
+        return;
+      }
+    }
+    MessageCli.NO_PROFILE_FOUND_TO_LOAD.printMessage(userName);
   }
 
   public void unloadProfile() {
