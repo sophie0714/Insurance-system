@@ -8,7 +8,7 @@ public class InsuranceSystem {
   // Create an array list where all clients profiles are stored
   public ArrayList<Client> listOfClients = new ArrayList<>();
 
-  public Client loadedProfile;
+  public String loadedProfile;
 
   public InsuranceSystem() {
     // Only this constructor can be used (if you need to initialise fields).
@@ -35,7 +35,7 @@ public class InsuranceSystem {
       Client aclient = listOfClients.get(i);
       String aclientName = aclient.getName();
       String aclientAge = aclient.getAge();
-      if (loadedProfile != null && loadedProfile.equals(aclient)){
+      if (loadedProfile != null && loadedProfile.equals(aclientName)){
         MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage("*** ", Integer.toString(i+1), aclientName, aclientAge);
       }else{
         MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(
@@ -51,8 +51,7 @@ public class InsuranceSystem {
 
     // If there is a loaded profile, print error message
     if (loadedProfile != null){
-      String aloadedProfileName = loadedProfile.getName();
-      MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(aloadedProfileName);
+      MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(loadedProfile);
       return;
     }
     // Determine if a name is unique or not
@@ -124,7 +123,7 @@ public class InsuranceSystem {
       if (userName.equals(aclientName)) {
         unloadProfile();
         MessageCli.PROFILE_LOADED.printMessage(userName);
-        loadedProfile = aclient;
+        loadedProfile = userName;
         return;
       }
     }
@@ -135,8 +134,7 @@ public class InsuranceSystem {
     // Check if a profile to load exists or not
     // If exist, print success message and let the loadedProfile null
     if (loadedProfile != null){
-      String aloadedProfileName = loadedProfile.getName();
-      MessageCli.PROFILE_UNLOADED.printMessage(aloadedProfileName); 
+      MessageCli.PROFILE_UNLOADED.printMessage(loadedProfile); 
       loadedProfile = null;
     // If not exist, error message is printed
     }else{
@@ -150,8 +148,7 @@ public class InsuranceSystem {
 
     // If the profile to delete is loaded, error message is printed
     if (loadedProfile != null){
-      String aloadedProfileName = loadedProfile.getName();
-      if (aloadedProfileName.equals(userName)){
+      if (loadedProfile.equals(userName)){
         MessageCli.CANNOT_DELETE_PROFILE_WHILE_LOADED.printMessage(userName);
         return;
       }
