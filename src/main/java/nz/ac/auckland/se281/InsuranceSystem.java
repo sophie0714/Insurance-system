@@ -49,6 +49,12 @@ public class InsuranceSystem {
     // Capitalise the first letter and decapitalise the rest of letters
     userName = userName.substring(0, 1).toUpperCase() + userName.substring(1).toLowerCase();
 
+    // If there is a loaded profile, print error message
+    if (loadedProfile != null){
+      String aloadedProfileName = loadedProfile.getName();
+      MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(aloadedProfileName);
+      return;
+    }
     // Determine if a name is unique or not
     // Initialise alreadyExist to false
     boolean alreadyExist = false;
