@@ -145,7 +145,22 @@ public class InsuranceSystem {
   }
 
   public void deleteProfile(String userName) {
-    // TODO: Complete this method.
+    // Capitalise the first letter and decapitalise the rest of letters
+    userName = userName.substring(0, 1).toUpperCase() + userName.substring(1).toLowerCase();
+    
+    // Check if a profile to delete is in the database
+    for (int i = 0; i < listOfClients.size(); i++) {
+      Client aclient = listOfClients.get(i);
+      String aclientName = aclient.getName();
+      // If exists, remove a profile from the database
+      if (userName.equals(aclientName)) {
+        listOfClients.remove(aclient);
+        MessageCli.PROFILE_DELETED.printMessage(userName);
+        return;
+      }
+    }
+    // If doesn't exist, print error message
+    MessageCli.NO_PROFILE_FOUND_TO_DELETE.printMessage(userName);
   }
 
   public void createPolicy(PolicyType type, String[] options) {
