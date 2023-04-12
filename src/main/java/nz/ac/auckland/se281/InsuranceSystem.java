@@ -125,7 +125,16 @@ public class InsuranceSystem {
   }
 
   public void unloadProfile() {
-    // TODO: Complete this method.
+    // Check if a profile to load exists or not
+    // If exist, print success message and let the loadedProfile null
+    if (loadedProfile != null){
+      String aloadedProfileName = loadedProfile.getName();
+      MessageCli.PROFILE_UNLOADED.printMessage(aloadedProfileName); 
+      loadedProfile = null;
+    // If not exist, error message is printed
+    }else{
+      MessageCli.NO_PROFILE_LOADED.printMessage();
+    }
   }
 
   public void deleteProfile(String userName) {
