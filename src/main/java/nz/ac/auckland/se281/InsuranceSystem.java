@@ -147,7 +147,16 @@ public class InsuranceSystem {
   public void deleteProfile(String userName) {
     // Capitalise the first letter and decapitalise the rest of letters
     userName = userName.substring(0, 1).toUpperCase() + userName.substring(1).toLowerCase();
-    
+
+    // If the profile to delete is loaded, error message is printed
+    if (loadedProfile != null){
+      String aloadedProfileName = loadedProfile.getName();
+      if (aloadedProfileName.equals(userName)){
+        MessageCli.CANNOT_DELETE_PROFILE_WHILE_LOADED.printMessage(userName);
+        return;
+      }
+    }
+
     // Check if a profile to delete is in the database
     for (int i = 0; i < listOfClients.size(); i++) {
       Client aclient = listOfClients.get(i);
