@@ -35,9 +35,11 @@ public class InsuranceSystem {
       Client aclient = listOfClients.get(i);
       String aclientName = aclient.getName();
       String aclientAge = aclient.getAge();
-      if (loadedProfile != null && loadedProfile.equals(aclientName)){
-        MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage("*** ", Integer.toString(i+1), aclientName, aclientAge);
-      }else{
+      // When there is a currently loaded profile, put *** in front of the loaded profile
+      if (loadedProfile != null && loadedProfile.equals(aclientName)) {
+        MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage(
+            "*** ", Integer.toString(i + 1), aclientName, aclientAge);
+      } else {
         MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(
             Integer.toString(i + 1), aclientName, aclientAge);
       }
@@ -50,7 +52,7 @@ public class InsuranceSystem {
     userName = userName.substring(0, 1).toUpperCase() + userName.substring(1).toLowerCase();
 
     // If there is a loaded profile, print error message
-    if (loadedProfile != null){
+    if (loadedProfile != null) {
       MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(loadedProfile);
       return;
     }
@@ -111,35 +113,38 @@ public class InsuranceSystem {
   }
 
   public void loadProfile(String userName) {
-    
+
     // Capitalise the first letter and decapitalise the rest of letters
     userName = userName.substring(0, 1).toUpperCase() + userName.substring(1).toLowerCase();
-    
+
     // Check if a profile to load is in the database or not
     for (int i = 0; i < listOfClients.size(); i++) {
       Client aclient = listOfClients.get(i);
       String aclientName = aclient.getName();
-      // If a profile is currently loaded, unload the currently loaded profile before loading new profile.
+      // If a profile to load exists in the database, loading is successful
       if (userName.equals(aclientName)) {
-        if (loadedProfile != null){
+        // If there is a loaded profile already, unload the loaded profile before laoding a new
+        // profile
+        if (loadedProfile != null) {
           unloadProfile();
         }
-      MessageCli.PROFILE_LOADED.printMessage(userName);
-      loadedProfile = userName;
-      return;
+        MessageCli.PROFILE_LOADED.printMessage(userName);
+        loadedProfile = userName;
+        return;
       }
     }
+    // If a profile cannot be found, print error message
     MessageCli.NO_PROFILE_FOUND_TO_LOAD.printMessage(userName);
   }
 
   public void unloadProfile() {
     // Check if a profile to load exists or not
-    // If exist, print success message and let the loadedProfile null
-    if (loadedProfile != null){
-      MessageCli.PROFILE_UNLOADED.printMessage(loadedProfile); 
+    // If exist, print success message and unload the loadedProfile
+    if (loadedProfile != null) {
+      MessageCli.PROFILE_UNLOADED.printMessage(loadedProfile);
       loadedProfile = null;
-    // If not exist, error message is printed
-    }else{
+      // If not exist, error message is printed
+    } else {
       MessageCli.NO_PROFILE_LOADED.printMessage();
     }
   }
@@ -149,8 +154,8 @@ public class InsuranceSystem {
     userName = userName.substring(0, 1).toUpperCase() + userName.substring(1).toLowerCase();
 
     // If the profile to delete is loaded, error message is printed
-    if (loadedProfile != null){
-      if (loadedProfile.equals(userName)){
+    if (loadedProfile != null) {
+      if (loadedProfile.equals(userName)) {
         MessageCli.CANNOT_DELETE_PROFILE_WHILE_LOADED.printMessage(userName);
         return;
       }
