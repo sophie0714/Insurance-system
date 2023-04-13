@@ -119,12 +119,14 @@ public class InsuranceSystem {
     for (int i = 0; i < listOfClients.size(); i++) {
       Client aclient = listOfClients.get(i);
       String aclientName = aclient.getName();
-
+      // If a profile is currently loaded, unload the currently loaded profile before loading new profile.
       if (userName.equals(aclientName)) {
-        unloadProfile();
-        MessageCli.PROFILE_LOADED.printMessage(userName);
-        loadedProfile = userName;
-        return;
+        if (loadedProfile != null){
+          unloadProfile();
+        }
+      MessageCli.PROFILE_LOADED.printMessage(userName);
+      loadedProfile = userName;
+      return;
       }
     }
     MessageCli.NO_PROFILE_FOUND_TO_LOAD.printMessage(userName);
