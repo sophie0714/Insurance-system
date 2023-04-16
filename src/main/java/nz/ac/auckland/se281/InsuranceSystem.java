@@ -8,7 +8,7 @@ public class InsuranceSystem {
   // Create an array list where all clients profiles are stored
   public ArrayList<Client> listOfClients = new ArrayList<>();
 
-  public String loadedProfile;
+  public Client loadedProfile;
 
   public InsuranceSystem() {
     // Only this constructor can be used (if you need to initialise fields).
@@ -36,7 +36,7 @@ public class InsuranceSystem {
       String aclientName = aclient.getName();
       String aclientAge = aclient.getAge();
       // When there is a currently loaded profile, put *** in front of the loaded profile
-      if (loadedProfile != null && loadedProfile.equals(aclientName)) {
+      if (loadedProfile != null && loadedProfile.equals(aclient)) {
         MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage(
             "*** ", Integer.toString(i + 1), aclientName, aclientAge);
       } else {
@@ -53,7 +53,8 @@ public class InsuranceSystem {
 
     // If there is a loaded profile, print error message
     if (loadedProfile != null) {
-      MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(loadedProfile);
+      String aloadedProfileName = loadedProfile.getName();
+      MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(aloadedProfileName);
       return;
     }
     // Determine if a name is unique or not
@@ -129,7 +130,7 @@ public class InsuranceSystem {
           unloadProfile();
         }
         MessageCli.PROFILE_LOADED.printMessage(userName);
-        loadedProfile = userName;
+        loadedProfile = aclient;
         return;
       }
     }
@@ -141,7 +142,8 @@ public class InsuranceSystem {
     // Check if a profile to load exists or not
     // If exist, print success message and unload the loadedProfile
     if (loadedProfile != null) {
-      MessageCli.PROFILE_UNLOADED.printMessage(loadedProfile);
+      String aloadedProfileName = loadedProfile.getName();
+      MessageCli.PROFILE_UNLOADED.printMessage(aloadedProfileName);
       loadedProfile = null;
       // If not exist, error message is printed
     } else {
@@ -155,7 +157,8 @@ public class InsuranceSystem {
 
     // If the profile to delete is loaded, error message is printed
     if (loadedProfile != null) {
-      if (loadedProfile.equals(userName)) {
+      String aloadedProfileName = loadedProfile.getName();
+      if (aloadedProfileName.equals(userName)) {
         MessageCli.CANNOT_DELETE_PROFILE_WHILE_LOADED.printMessage(userName);
         return;
       }
@@ -176,7 +179,48 @@ public class InsuranceSystem {
     MessageCli.NO_PROFILE_FOUND_TO_DELETE.printMessage(userName);
   }
 
+  public enum Type {
+    HOME,
+    CAR,
+    LIFE
+  }
+
   public void createPolicy(PolicyType type, String[] options) {
-    // TODO: Complete this method.
+    // If there is no loaded profile, print error message
+    if (loadedProfile == null) {
+      MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
+    }
+  
+    switch (type) {
+      case HOME:
+        Boolean rental;
+        if (options[2].toLowerCase()== "yes"){
+          rental = true;
+        }else{
+          rental = false;
+        }
+
+        PolicyHome policyHome = new PolicyHome(Integer.valueOf(options[0]), options[1], rental);
+        break;
+
+      case CAR:
+        Boolean breakdown;
+        if (options[3].toLowerCase()=="yes"){
+          breakdown = true;
+        }else{
+          breakdown = false;
+        }
+
+        PolicyCar policyCar = new PolicyCar(Integer.valueOf(options[0]), options[1], options[2], breakdown);
+        break;
+
+      case LIFE:
+        if (Integer.valueOf(loadedProfile.getAge())>100){
+          MessageCli.OVER_AGE_LIMIT_LIFE_POLICY.printMessage(loadedProfile.getName());
+        }
+
+        PolicyLife policyLife = new PolicyLife(Integer.valueOf(options[0]));
+        break;
+    }
   }
 }
