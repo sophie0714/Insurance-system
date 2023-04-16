@@ -199,8 +199,9 @@ public class InsuranceSystem {
         }else{
           rental = false;
         }
-
+        // Store home policy for the loaded profile
         PolicyHome policyHome = new PolicyHome(Integer.valueOf(options[0]), options[1], rental);
+        loadedProfile.addPolicy(policyHome);
         break;
 
       case CAR:
@@ -210,16 +211,18 @@ public class InsuranceSystem {
         }else{
           breakdown = false;
         }
-
+        // Store car policy for the loaded profile
         PolicyCar policyCar = new PolicyCar(Integer.valueOf(options[0]), options[1], options[2], breakdown);
+        loadedProfile.addPolicy(policyCar);
         break;
 
       case LIFE:
         if (Integer.valueOf(loadedProfile.getAge())>100){
           MessageCli.OVER_AGE_LIMIT_LIFE_POLICY.printMessage(loadedProfile.getName());
         }
-
+        // Store life policy for the loaded profile
         PolicyLife policyLife = new PolicyLife(Integer.valueOf(options[0]));
+        loadedProfile.addPolicy(policyLife);
         break;
     }
   }
