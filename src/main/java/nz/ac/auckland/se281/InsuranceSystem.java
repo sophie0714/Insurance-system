@@ -220,6 +220,14 @@ public class InsuranceSystem {
         if (Integer.valueOf(loadedProfile.getAge())>100){
           MessageCli.OVER_AGE_LIMIT_LIFE_POLICY.printMessage(loadedProfile.getName());
         }
+        // If there is already a life policy, print error message
+        ArrayList<Policy> policies = loadedProfile.getListOfPolicies();
+        for (int i= 0; i<loadedProfile.getListOfPolicies().size();i++){
+            if (policies.get(i).getClass().equals(PolicyLife.class)){
+              MessageCli.ALREADY_HAS_LIFE_POLICY.printMessage(loadedProfile.getName());
+              return;
+            }
+        }
         // Store life policy for the loaded profile
         PolicyLife policyLife = new PolicyLife(Integer.valueOf(options[0]));
         loadedProfile.addPolicy(policyLife);

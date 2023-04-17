@@ -30,4 +30,9 @@ public class Client {
   public void addPolicy(Policy policy){
     listOfPolicies.add(policy);
   }
+
+  // Get policy list outside of this class
+  public ArrayList<Policy> getListOfPolicies(){
+    return listOfPolicies;
+  }
 }
