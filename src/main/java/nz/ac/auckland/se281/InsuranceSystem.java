@@ -189,6 +189,7 @@ public class InsuranceSystem {
     // If there is no loaded profile, print error message
     if (loadedProfile == null) {
       MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
+      return;
     }
   
     switch (type) {
@@ -202,6 +203,7 @@ public class InsuranceSystem {
         // Store home policy for the loaded profile
         PolicyHome policyHome = new PolicyHome(Integer.valueOf(options[0]), options[1], rental);
         loadedProfile.addPolicy(policyHome);
+        MessageCli.NEW_POLICY_CREATED.printMessage("home", loadedProfile.getName());
         break;
 
       case CAR:
@@ -214,11 +216,13 @@ public class InsuranceSystem {
         // Store car policy for the loaded profile
         PolicyCar policyCar = new PolicyCar(Integer.valueOf(options[0]), options[1], options[2], breakdown);
         loadedProfile.addPolicy(policyCar);
+        MessageCli.NEW_POLICY_CREATED.printMessage("car", loadedProfile.getName());
         break;
 
       case LIFE:
         if (Integer.valueOf(loadedProfile.getAge())>100){
           MessageCli.OVER_AGE_LIMIT_LIFE_POLICY.printMessage(loadedProfile.getName());
+          return;
         }
         // If there is already a life policy, print error message
         ArrayList<Policy> policies = loadedProfile.getListOfPolicies();
@@ -231,6 +235,7 @@ public class InsuranceSystem {
         // Store life policy for the loaded profile
         PolicyLife policyLife = new PolicyLife(Integer.valueOf(options[0]));
         loadedProfile.addPolicy(policyLife);
+        MessageCli.NEW_POLICY_CREATED.printMessage("life", loadedProfile.getName());
         break;
     }
   }
