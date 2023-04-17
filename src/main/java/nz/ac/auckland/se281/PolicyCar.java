@@ -15,6 +15,11 @@ public class PolicyCar extends Policy{
         this.licensePlate = licensePlate;
         this.breakdown = breakdown;
     }
+
+    // Get attribute makeAndModel in a type PolicyCar outside of this class
+    public String getMakeAndModel(){
+        return makeAndModel;
+    }
     
     // Calculate the base premium for car
     @Override

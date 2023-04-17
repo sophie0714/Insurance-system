@@ -12,6 +12,11 @@ public class PolicyHome extends Policy{
         this.address = address;
         this.rental = rental;
     }
+
+    // Get instance address in PolicyHome class outside of this class
+    public String getAddress(){
+        return address;
+    }
     
     // Calculate the base premium of home
     @Override
