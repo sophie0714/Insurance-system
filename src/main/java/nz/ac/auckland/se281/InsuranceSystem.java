@@ -36,66 +36,123 @@ public class InsuranceSystem {
       String aclientName = aclient.getName();
       String aclientAge = aclient.getAge();
       // Add all premium for the loaded profile
-      int totalPremium =0;
-      for (Policy policy:aclient.getListOfPolicies()){
+      int totalPremium = 0;
+      for (Policy policy : aclient.getListOfPolicies()) {
         totalPremium = totalPremium + policy.getBasePremium(aclient);
       }
       // Discount if multiple policiieis for a client
-      if (aclient.getListOfPolicies().size() == 2){
+      if (aclient.getListOfPolicies().size() == 2) {
         totalPremium = (int) (0.9 * totalPremium);
-      }else if(aclient.getListOfPolicies().size()>2){
+      } else if (aclient.getListOfPolicies().size() > 2) {
         totalPremium = (int) (0.8 * totalPremium);
       }
       // When there is a currently loaded profile, put *** in front of the loaded profile
       if (loadedProfile != null && loadedProfile.equals(aclient)) {
-        if(aclient.getListOfPolicies().size() ==1){
+        if (aclient.getListOfPolicies().size() == 1) {
           MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-            "*** ", Integer.toString(i + 1), aclientName, aclientAge, "1", "y", Integer.toString(totalPremium));
-        }else{
+              "*** ",
+              Integer.toString(i + 1),
+              aclientName,
+              aclientAge,
+              "1",
+              "y",
+              Integer.toString(totalPremium));
+        } else {
           MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-            "*** ", Integer.toString(i + 1), aclientName, aclientAge, Integer.toString(aclient.getListOfPolicies().size()), "ies", Integer.toString(totalPremium));
+              "*** ",
+              Integer.toString(i + 1),
+              aclientName,
+              aclientAge,
+              Integer.toString(aclient.getListOfPolicies().size()),
+              "ies",
+              Integer.toString(totalPremium));
         }
-        
+
       } else {
-        if(aclient.getListOfPolicies().size() ==1){
+        if (aclient.getListOfPolicies().size() == 1) {
           MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-            "", Integer.toString(i + 1), aclientName, aclientAge, "1", "y", Integer.toString(totalPremium));
-        }else{
+              "",
+              Integer.toString(i + 1),
+              aclientName,
+              aclientAge,
+              "1",
+              "y",
+              Integer.toString(totalPremium));
+        } else {
           MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-            "", Integer.toString(i + 1), aclientName, aclientAge, Integer.toString(aclient.getListOfPolicies().size()), "ies", Integer.toString(totalPremium));
+              "",
+              Integer.toString(i + 1),
+              aclientName,
+              aclientAge,
+              Integer.toString(aclient.getListOfPolicies().size()),
+              "ies",
+              Integer.toString(totalPremium));
         }
       }
-       // Print all policies for a client
-      for (Policy policy:aclient.getListOfPolicies()){
+      // Print all policies for a client
+      for (Policy policy : aclient.getListOfPolicies()) {
         // Home policy
-        if (policy.getClass().equals(PolicyHome.class)){
+        if (policy.getClass().equals(PolicyHome.class)) {
           PolicyHome policyHome = (PolicyHome) policy;
-          if (aclient.getListOfPolicies().size()<2){
-            MessageCli.PRINT_DB_HOME_POLICY.printMessage(policyHome.getAddress(), Integer.toString(policy.getSumInsured()), Integer.toString(policyHome.getBasePremium(aclient)), Integer.toString(policyHome.getBasePremium(aclient)));
-          }else if (aclient.getListOfPolicies().size()==2){
-            MessageCli.PRINT_DB_HOME_POLICY.printMessage(policyHome.getAddress(), Integer.toString(policy.getSumInsured()), Integer.toString(policyHome.getBasePremium(aclient)), Integer.toString((int)(policyHome.getBasePremium(aclient)*0.9)));
-          } else{
-            MessageCli.PRINT_DB_HOME_POLICY.printMessage(policyHome.getAddress(), Integer.toString(policy.getSumInsured()), Integer.toString(policyHome.getBasePremium(aclient)), Integer.toString((int)(policyHome.getBasePremium(aclient)*0.8)));
+          if (aclient.getListOfPolicies().size() < 2) {
+            MessageCli.PRINT_DB_HOME_POLICY.printMessage(
+                policyHome.getAddress(),
+                Integer.toString(policy.getSumInsured()),
+                Integer.toString(policyHome.getBasePremium(aclient)),
+                Integer.toString(policyHome.getBasePremium(aclient)));
+          } else if (aclient.getListOfPolicies().size() == 2) {
+            MessageCli.PRINT_DB_HOME_POLICY.printMessage(
+                policyHome.getAddress(),
+                Integer.toString(policy.getSumInsured()),
+                Integer.toString(policyHome.getBasePremium(aclient)),
+                Integer.toString((int) (policyHome.getBasePremium(aclient) * 0.9)));
+          } else {
+            MessageCli.PRINT_DB_HOME_POLICY.printMessage(
+                policyHome.getAddress(),
+                Integer.toString(policy.getSumInsured()),
+                Integer.toString(policyHome.getBasePremium(aclient)),
+                Integer.toString((int) (policyHome.getBasePremium(aclient) * 0.8)));
           }
-        // Car policy
-        } else if(policy.getClass().equals(PolicyCar.class)){
+          // Car policy
+        } else if (policy.getClass().equals(PolicyCar.class)) {
           PolicyCar policyCar = (PolicyCar) policy;
-          if (aclient.getListOfPolicies().size()<2){
-            MessageCli.PRINT_DB_CAR_POLICY.printMessage(policyCar.getMakeAndModel(), Integer.toString(policy.getSumInsured()), Integer.toString(policyCar.getBasePremium(aclient)),Integer.toString(policyCar.getBasePremium(aclient)));
-          }else if (aclient.getListOfPolicies().size()==2){
-            MessageCli.PRINT_DB_CAR_POLICY.printMessage(policyCar.getMakeAndModel(), Integer.toString(policy.getSumInsured()), Integer.toString(policyCar.getBasePremium(aclient)),Integer.toString((int)(policyCar.getBasePremium(aclient)*0.9)));
-          }else{
-            MessageCli.PRINT_DB_CAR_POLICY.printMessage(policyCar.getMakeAndModel(), Integer.toString(policy.getSumInsured()), Integer.toString(policyCar.getBasePremium(aclient)),Integer.toString((int)(policyCar.getBasePremium(aclient)*0.8)));
+          if (aclient.getListOfPolicies().size() < 2) {
+            MessageCli.PRINT_DB_CAR_POLICY.printMessage(
+                policyCar.getMakeAndModel(),
+                Integer.toString(policy.getSumInsured()),
+                Integer.toString(policyCar.getBasePremium(aclient)),
+                Integer.toString(policyCar.getBasePremium(aclient)));
+          } else if (aclient.getListOfPolicies().size() == 2) {
+            MessageCli.PRINT_DB_CAR_POLICY.printMessage(
+                policyCar.getMakeAndModel(),
+                Integer.toString(policy.getSumInsured()),
+                Integer.toString(policyCar.getBasePremium(aclient)),
+                Integer.toString((int) (policyCar.getBasePremium(aclient) * 0.9)));
+          } else {
+            MessageCli.PRINT_DB_CAR_POLICY.printMessage(
+                policyCar.getMakeAndModel(),
+                Integer.toString(policy.getSumInsured()),
+                Integer.toString(policyCar.getBasePremium(aclient)),
+                Integer.toString((int) (policyCar.getBasePremium(aclient) * 0.8)));
           }
-        // Life policy
-        }else if(policy.getClass().equals(PolicyLife.class)){
+          // Life policy
+        } else if (policy.getClass().equals(PolicyLife.class)) {
           PolicyLife policyLife = (PolicyLife) policy;
-          if (aclient.getListOfPolicies().size()<2){
-            MessageCli.PRINT_DB_LIFE_POLICY.printMessage( Integer.toString(policy.getSumInsured()), Integer.toString(policyLife.getBasePremium(aclient)),Integer.toString(policyLife.getBasePremium(aclient)));
-          }else if (aclient.getListOfPolicies().size()==2){
-            MessageCli.PRINT_DB_LIFE_POLICY.printMessage( Integer.toString(policy.getSumInsured()), Integer.toString(policyLife.getBasePremium(aclient)),Integer.toString((int)(policyLife.getBasePremium(aclient)*0.9)));
-          }else{
-            MessageCli.PRINT_DB_LIFE_POLICY.printMessage( Integer.toString(policy.getSumInsured()), Integer.toString(policyLife.getBasePremium(aclient)),Integer.toString((int)(policyLife.getBasePremium(aclient)*0.8)));
+          if (aclient.getListOfPolicies().size() < 2) {
+            MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
+                Integer.toString(policy.getSumInsured()),
+                Integer.toString(policyLife.getBasePremium(aclient)),
+                Integer.toString(policyLife.getBasePremium(aclient)));
+          } else if (aclient.getListOfPolicies().size() == 2) {
+            MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
+                Integer.toString(policy.getSumInsured()),
+                Integer.toString(policyLife.getBasePremium(aclient)),
+                Integer.toString((int) (policyLife.getBasePremium(aclient) * 0.9)));
+          } else {
+            MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
+                Integer.toString(policy.getSumInsured()),
+                Integer.toString(policyLife.getBasePremium(aclient)),
+                Integer.toString((int) (policyLife.getBasePremium(aclient) * 0.8)));
           }
         }
       }
@@ -247,13 +304,13 @@ public class InsuranceSystem {
       MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
       return;
     }
-  
+
     switch (type) {
       case HOME:
         Boolean rental;
-        if (options[2].contains("y")){
+        if (options[2].contains("y")) {
           rental = true;
-        }else{
+        } else {
           rental = false;
         }
         // Store home policy for the loaded profile
@@ -264,29 +321,30 @@ public class InsuranceSystem {
 
       case CAR:
         Boolean breakdown;
-        if (options[3].contains("y")){
+        if (options[3].contains("y")) {
           breakdown = true;
-        }else{
+        } else {
           breakdown = false;
         }
         // Store car policy for the loaded profile
-        PolicyCar policyCar = new PolicyCar(Integer.valueOf(options[0]), options[1], options[2], breakdown);
+        PolicyCar policyCar =
+            new PolicyCar(Integer.valueOf(options[0]), options[1], options[2], breakdown);
         loadedProfile.addPolicy(policyCar);
         MessageCli.NEW_POLICY_CREATED.printMessage("car", loadedProfile.getName());
         break;
 
       case LIFE:
-        if (Integer.valueOf(loadedProfile.getAge())>100){
+        if (Integer.valueOf(loadedProfile.getAge()) > 100) {
           MessageCli.OVER_AGE_LIMIT_LIFE_POLICY.printMessage(loadedProfile.getName());
           return;
         }
         // If there is already a life policy, print error message
         ArrayList<Policy> policies = loadedProfile.getListOfPolicies();
-        for (int i= 0; i<loadedProfile.getListOfPolicies().size();i++){
-            if (policies.get(i).getClass().equals(PolicyLife.class)){
-              MessageCli.ALREADY_HAS_LIFE_POLICY.printMessage(loadedProfile.getName());
-              return;
-            }
+        for (int i = 0; i < loadedProfile.getListOfPolicies().size(); i++) {
+          if (policies.get(i).getClass().equals(PolicyLife.class)) {
+            MessageCli.ALREADY_HAS_LIFE_POLICY.printMessage(loadedProfile.getName());
+            return;
+          }
         }
         // Store life policy for the loaded profile
         PolicyLife policyLife = new PolicyLife(Integer.valueOf(options[0]));

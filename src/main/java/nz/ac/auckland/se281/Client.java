@@ -9,7 +9,6 @@ public class Client {
 
   public ArrayList<Policy> listOfPolicies = new ArrayList<>();
 
-
   // Construct the class
   public Client(String name, String age) {
     this.name = name;
@@ -27,12 +26,12 @@ public class Client {
   }
 
   // Add policies for each client to its policy list
-  public void addPolicy(Policy policy){
+  public void addPolicy(Policy policy) {
     listOfPolicies.add(policy);
   }
 
   // Get policy list outside of this class
-  public ArrayList<Policy> getListOfPolicies(){
+  public ArrayList<Policy> getListOfPolicies() {
     return listOfPolicies;
   }
 }
