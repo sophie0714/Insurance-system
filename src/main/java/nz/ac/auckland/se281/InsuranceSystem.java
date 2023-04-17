@@ -264,7 +264,7 @@ public class InsuranceSystem {
 
       case CAR:
         Boolean breakdown;
-        if (options[3].toLowerCase()=="yes"){
+        if (options[3].contains("y")){
           breakdown = true;
         }else{
           breakdown = false;

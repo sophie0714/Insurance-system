@@ -32,7 +32,6 @@ public class PolicyCar extends Policy{
         }else{
             basePremium =  (int) (0.1 * sumInsured);
         }
-
         // If the car has a breakdown, extra charge of $80 is added to the base premium
         if (breakdown == true){
             basePremium = 80 + basePremium;
