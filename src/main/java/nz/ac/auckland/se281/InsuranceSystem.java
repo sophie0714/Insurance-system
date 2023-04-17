@@ -48,11 +48,22 @@ public class InsuranceSystem {
       }
       // When there is a currently loaded profile, put *** in front of the loaded profile
       if (loadedProfile != null && loadedProfile.equals(aclient)) {
-        MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage(
-            "*** ", Integer.toString(i + 1), aclientName, aclientAge);
+        if(loadedProfile.getListOfPolicies().size() ==1){
+          MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+            "*** ", Integer.toString(i + 1), aclientName, aclientAge, "1", "y", Integer.toString(totalPremium));
+        }else{
+          MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+            "*** ", Integer.toString(i + 1), aclientName, aclientAge, Integer.toString(loadedProfile.getListOfPolicies().size()), "y", Integer.toString(totalPremium));
+        }
+        
       } else {
-        MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(
-            Integer.toString(i + 1), aclientName, aclientAge);
+        if(loadedProfile.getListOfPolicies().size() ==1){
+          MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+            "", Integer.toString(i + 1), aclientName, aclientAge, "1", "y", Integer.toString(totalPremium));
+        }else{
+          MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+            "", Integer.toString(i + 1), aclientName, aclientAge, Integer.toString(loadedProfile.getListOfPolicies().size()), "y", Integer.toString(totalPremium));
+        }
       }
     }
   }
