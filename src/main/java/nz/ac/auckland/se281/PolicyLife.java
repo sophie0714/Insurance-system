@@ -10,7 +10,8 @@ public class PolicyLife extends Policy{
     // Calculate the base premium for life
     @Override
     public int getBasePremium( Client loadedClient){
-        return ((1+Integer.valueOf(loadedClient.getAge())/100)/100) * sumInsured;
+        Double age = Double.valueOf(loadedClient.getAge());
+        return (int) (sumInsured * ((1+(age/100))/100));
     }
     
 }

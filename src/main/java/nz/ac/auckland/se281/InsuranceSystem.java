@@ -38,13 +38,13 @@ public class InsuranceSystem {
       // Add all premium for the loaded profile
       int totalPremium =0;
       for (Policy policy:loadedProfile.getListOfPolicies()){
-        totalPremium += policy.getBasePremium(loadedProfile);
+        totalPremium = totalPremium + policy.getBasePremium(loadedProfile);
       }
       // Discount if multiple policiieis for a client
       if ( loadedProfile.getListOfPolicies().size() == 2){
-        totalPremium = (int) 0.9 * totalPremium;
+        totalPremium = (int) (0.9 * totalPremium);
       }else if(loadedProfile.getListOfPolicies().size()>2){
-        totalPremium = (int) 0.8 * totalPremium;
+        totalPremium = (int) (0.8 * totalPremium);
       }
       // When there is a currently loaded profile, put *** in front of the loaded profile
       if (loadedProfile != null && loadedProfile.equals(aclient)) {
@@ -53,7 +53,7 @@ public class InsuranceSystem {
             "*** ", Integer.toString(i + 1), aclientName, aclientAge, "1", "y", Integer.toString(totalPremium));
         }else{
           MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-            "*** ", Integer.toString(i + 1), aclientName, aclientAge, Integer.toString(loadedProfile.getListOfPolicies().size()), "y", Integer.toString(totalPremium));
+            "*** ", Integer.toString(i + 1), aclientName, aclientAge, Integer.toString(loadedProfile.getListOfPolicies().size()), "ies", Integer.toString(totalPremium));
         }
         
       } else {
@@ -62,7 +62,7 @@ public class InsuranceSystem {
             "", Integer.toString(i + 1), aclientName, aclientAge, "1", "y", Integer.toString(totalPremium));
         }else{
           MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-            "", Integer.toString(i + 1), aclientName, aclientAge, Integer.toString(loadedProfile.getListOfPolicies().size()), "y", Integer.toString(totalPremium));
+            "", Integer.toString(i + 1), aclientName, aclientAge, Integer.toString(loadedProfile.getListOfPolicies().size()), "ies", Integer.toString(totalPremium));
         }
       }
     }
