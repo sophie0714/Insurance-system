@@ -251,7 +251,7 @@ public class InsuranceSystem {
     switch (type) {
       case HOME:
         Boolean rental;
-        if (options[2].toLowerCase()== "yes"){
+        if (options[2].contains("y")){
           rental = true;
         }else{
           rental = false;
