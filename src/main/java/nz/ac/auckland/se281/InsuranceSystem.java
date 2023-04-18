@@ -35,17 +35,13 @@ public class InsuranceSystem {
       Client aclient = listOfClients.get(i);
       String aclientName = aclient.getName();
       String aclientAge = aclient.getAge();
-      // Add all premium for the loaded profile
+      
+      // Calculate overall premium for a client
       int totalPremium = 0;
       for (Policy policy : aclient.getListOfPolicies()) {
-        totalPremium = totalPremium + policy.getBasePremium(aclient);
+        totalPremium = totalPremium + policy.getDiscountedPremium(aclient,policy);
       }
-      // Discount if multiple policiieis for a client
-      if (aclient.getListOfPolicies().size() == 2) {
-        totalPremium = (int) (0.9 * totalPremium);
-      } else if (aclient.getListOfPolicies().size() > 2) {
-        totalPremium = (int) (0.8 * totalPremium);
-      }
+    
       // When there is a currently loaded profile, put *** in front of the loaded profile
       String loadedOrNot = "";
       if (loadedProfile != null && loadedProfile.equals(aclient)) {
