@@ -94,66 +94,26 @@ public class InsuranceSystem {
         // Home policy
         if (policy.getClass().equals(PolicyHome.class)) {
           PolicyHome policyHome = (PolicyHome) policy;
-          if (aclient.getListOfPolicies().size() < 2) {
-            MessageCli.PRINT_DB_HOME_POLICY.printMessage(
-                policyHome.getAddress(),
-                Integer.toString(policy.getSumInsured()),
-                Integer.toString(policyHome.getBasePremium(aclient)),
-                Integer.toString(policyHome.getBasePremium(aclient)));
-          } else if (aclient.getListOfPolicies().size() == 2) {
-            MessageCli.PRINT_DB_HOME_POLICY.printMessage(
-                policyHome.getAddress(),
-                Integer.toString(policy.getSumInsured()),
-                Integer.toString(policyHome.getBasePremium(aclient)),
-                Integer.toString((int) (policyHome.getBasePremium(aclient) * 0.9)));
-          } else {
-            MessageCli.PRINT_DB_HOME_POLICY.printMessage(
-                policyHome.getAddress(),
-                Integer.toString(policy.getSumInsured()),
-                Integer.toString(policyHome.getBasePremium(aclient)),
-                Integer.toString((int) (policyHome.getBasePremium(aclient) * 0.8)));
-          }
+          MessageCli.PRINT_DB_HOME_POLICY.printMessage(
+              policyHome.getAddress(),
+              Integer.toString(policy.getSumInsured()),
+              Integer.toString(policyHome.getBasePremium(aclient)),
+              Integer.toString(policyHome.getDiscountedPremium(aclient, policy)));
           // Car policy
         } else if (policy.getClass().equals(PolicyCar.class)) {
           PolicyCar policyCar = (PolicyCar) policy;
-          if (aclient.getListOfPolicies().size() < 2) {
-            MessageCli.PRINT_DB_CAR_POLICY.printMessage(
-                policyCar.getMakeAndModel(),
-                Integer.toString(policy.getSumInsured()),
-                Integer.toString(policyCar.getBasePremium(aclient)),
-                Integer.toString(policyCar.getBasePremium(aclient)));
-          } else if (aclient.getListOfPolicies().size() == 2) {
-            MessageCli.PRINT_DB_CAR_POLICY.printMessage(
-                policyCar.getMakeAndModel(),
-                Integer.toString(policy.getSumInsured()),
-                Integer.toString(policyCar.getBasePremium(aclient)),
-                Integer.toString((int) (policyCar.getBasePremium(aclient) * 0.9)));
-          } else {
-            MessageCli.PRINT_DB_CAR_POLICY.printMessage(
-                policyCar.getMakeAndModel(),
-                Integer.toString(policy.getSumInsured()),
-                Integer.toString(policyCar.getBasePremium(aclient)),
-                Integer.toString((int) (policyCar.getBasePremium(aclient) * 0.8)));
-          }
+          MessageCli.PRINT_DB_CAR_POLICY.printMessage(
+              policyCar.getMakeAndModel(),
+              Integer.toString(policy.getSumInsured()),
+              Integer.toString(policyCar.getBasePremium(aclient)),
+              Integer.toString(policyCar.getDiscountedPremium(aclient, policy)));
           // Life policy
-        } else if (policy.getClass().equals(PolicyLife.class)) {
+        } else {
           PolicyLife policyLife = (PolicyLife) policy;
-          if (aclient.getListOfPolicies().size() < 2) {
-            MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
-                Integer.toString(policy.getSumInsured()),
-                Integer.toString(policyLife.getBasePremium(aclient)),
-                Integer.toString(policyLife.getBasePremium(aclient)));
-          } else if (aclient.getListOfPolicies().size() == 2) {
-            MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
-                Integer.toString(policy.getSumInsured()),
-                Integer.toString(policyLife.getBasePremium(aclient)),
-                Integer.toString((int) (policyLife.getBasePremium(aclient) * 0.9)));
-          } else {
-            MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
-                Integer.toString(policy.getSumInsured()),
-                Integer.toString(policyLife.getBasePremium(aclient)),
-                Integer.toString((int) (policyLife.getBasePremium(aclient) * 0.8)));
-          }
+          MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
+              Integer.toString(policy.getSumInsured()),
+              Integer.toString(policyLife.getBasePremium(aclient)),
+              Integer.toString(policyLife.getDiscountedPremium(aclient, policy)));
         }
       }
     }
