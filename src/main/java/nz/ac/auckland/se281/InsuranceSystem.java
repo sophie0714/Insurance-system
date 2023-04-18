@@ -6,9 +6,9 @@ import nz.ac.auckland.se281.Main.PolicyType;
 public class InsuranceSystem {
 
   // Create an array list where all clients profiles are stored
-  public ArrayList<Client> listOfClients = new ArrayList<>();
+  protected ArrayList<Client> listOfClients = new ArrayList<>();
 
-  public Client loadedProfile;
+  private Client loadedProfile;
 
   public InsuranceSystem() {
     // Only this constructor can be used (if you need to initialise fields).
@@ -35,7 +35,7 @@ public class InsuranceSystem {
       Client aclient = listOfClients.get(i);
       String aclientName = aclient.getName();
       String aclientAge = aclient.getAge();
-      
+
       // Calculate overall premium for a client
       int totalPremium = 0;
       for (Policy policy : aclient.getListOfPolicies()) {
