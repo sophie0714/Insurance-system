@@ -16,7 +16,7 @@ public abstract class Policy extends InsuranceSystem {
   }
 
   // All policies need to calculate the base premium
-  public abstract int getBasePremium(Client loadedClient);
+  public abstract int getBasePremium(Client aclient);
 
   // All policies may have discounted premium
   public int getDiscountedPremium(Client aclient, Policy policy){

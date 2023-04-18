@@ -20,7 +20,7 @@ public class PolicyHome extends Policy {
 
   // Calculate the base premium of home
   @Override
-  public int getBasePremium(Client loadedClient) {
+  public int getBasePremium(Client aclient) {
 
     // If home is rented out, the base premium is 2% of the sum insured
     if (rental) {

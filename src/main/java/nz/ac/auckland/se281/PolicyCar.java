@@ -22,10 +22,10 @@ public class PolicyCar extends Policy {
 
   // Calculate the base premium for car
   @Override
-  public int getBasePremium(Client loadedClient) {
+  public int getBasePremium(Client aclient) {
     int basePremium;
     // If the client is youger than 25, the base premium is 15% of the sum insured
-    if (Integer.valueOf(loadedClient.getAge()) < 25) {
+    if (Integer.valueOf(aclient.getAge()) < 25) {
       basePremium = (int) (0.15 * sumInsured);
       // If the client is older or equals to 25, the base premium is 10% of the sum insured
     } else {
