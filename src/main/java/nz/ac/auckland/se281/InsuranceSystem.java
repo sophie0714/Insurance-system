@@ -47,48 +47,27 @@ public class InsuranceSystem {
         totalPremium = (int) (0.8 * totalPremium);
       }
       // When there is a currently loaded profile, put *** in front of the loaded profile
+      String loadedOrNot = "";
       if (loadedProfile != null && loadedProfile.equals(aclient)) {
-        if (aclient.getListOfPolicies().size() == 1) {
-          MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-              "*** ",
-              Integer.toString(i + 1),
-              aclientName,
-              aclientAge,
-              "1",
-              "y",
-              Integer.toString(totalPremium));
-        } else {
-          MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-              "*** ",
-              Integer.toString(i + 1),
-              aclientName,
-              aclientAge,
-              Integer.toString(aclient.getListOfPolicies().size()),
-              "ies",
-              Integer.toString(totalPremium));
-        }
-
-      } else {
-        if (aclient.getListOfPolicies().size() == 1) {
-          MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-              "",
-              Integer.toString(i + 1),
-              aclientName,
-              aclientAge,
-              "1",
-              "y",
-              Integer.toString(totalPremium));
-        } else {
-          MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-              "",
-              Integer.toString(i + 1),
-              aclientName,
-              aclientAge,
-              Integer.toString(aclient.getListOfPolicies().size()),
-              "ies",
-              Integer.toString(totalPremium));
-        }
+        loadedOrNot = "*** ";
       }
+
+      // When a client has only one policy, "policy" instead of "policies" has to be printed
+      String ending = "ies";
+      if (aclient.getListOfPolicies().size() == 1) {
+        ending = "y";
+      }
+
+      // Print list of clients
+      MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+          loadedOrNot,
+          Integer.toString(i + 1),
+          aclientName,
+          aclientAge,
+          Integer.toString(aclient.getListOfPolicies().size()),
+          ending,
+          Integer.toString(totalPremium));
+
       // Print all policies for a client
       for (Policy policy : aclient.getListOfPolicies()) {
         // Home policy
