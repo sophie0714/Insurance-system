@@ -39,9 +39,9 @@ public class InsuranceSystem {
       // Calculate overall premium for a client
       int totalPremium = 0;
       for (Policy policy : aclient.getListOfPolicies()) {
-        totalPremium = totalPremium + policy.getDiscountedPremium(aclient,policy);
+        totalPremium = totalPremium + policy.getDiscountedPremium(aclient, policy);
       }
-    
+
       // When there is a currently loaded profile, put *** in front of the loaded profile
       String loadedOrNot = "";
       if (loadedProfile != null && loadedProfile.equals(aclient)) {

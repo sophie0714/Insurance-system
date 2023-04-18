@@ -19,15 +19,14 @@ public abstract class Policy extends InsuranceSystem {
   public abstract int getBasePremium(Client aclient);
 
   // All policies may have discounted premium
-  public int getDiscountedPremium(Client aclient, Policy policy){
+  public int getDiscountedPremium(Client aclient, Policy policy) {
     int basePremium = policy.getBasePremium(aclient);
-    if (aclient.getListOfPolicies().size()== 2){
-        return (int)(0.9 * basePremium);
-    }else if (aclient.getListOfPolicies().size()>2){
-        return (int)(0.8 * basePremium);
-    }else{
-        return basePremium;
+    if (aclient.getListOfPolicies().size() == 2) {
+      return (int) (0.9 * basePremium);
+    } else if (aclient.getListOfPolicies().size() > 2) {
+      return (int) (0.8 * basePremium);
+    } else {
+      return basePremium;
     }
   }
-  
 }
