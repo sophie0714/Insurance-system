@@ -11,6 +11,6 @@ public class PolicyLife extends Policy {
   @Override
   public int getBasePremium(Client aclient) {
     Double age = Double.valueOf(aclient.getAge());
-    return (int) (sumInsured * ((1 + (age / 100)) / 100));
+    return (int) ((sumInsured * ((1 + (age / 100))) / 100));
   }
 }
