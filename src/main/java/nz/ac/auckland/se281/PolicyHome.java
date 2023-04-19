@@ -13,7 +13,7 @@ public class PolicyHome extends Policy {
     this.rental = rental;
   }
 
-  // Get instance address in PolicyHome class outside of this class
+  // Get attribute address in PolicyHome class outside of this class
   public String getAddress() {
     return address;
   }

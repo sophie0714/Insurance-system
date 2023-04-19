@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Client {
   // Instance fields
-  protected String name;
-  protected String age;
+  private String name;
+  private String age;
 
-  public ArrayList<Policy> listOfPolicies = new ArrayList<>();
+  private ArrayList<Policy> listOfPolicies = new ArrayList<>();
 
   // Construct the class
   public Client(String name, String age) {
