@@ -243,7 +243,7 @@ public class InsuranceSystem {
     switch (type) {
       case HOME:
         Boolean rental;
-        if (options[2].contains("y")) {
+        if (options[2].toLowerCase().contains("y")) {
           rental = true;
         } else {
           rental = false;
@@ -256,7 +256,7 @@ public class InsuranceSystem {
 
       case CAR:
         Boolean breakdown;
-        if (options[3].contains("y")) {
+        if (options[3].toLowerCase().contains("y")) {
           breakdown = true;
         } else {
           breakdown = false;
