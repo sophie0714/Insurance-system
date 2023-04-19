@@ -6,7 +6,7 @@ import nz.ac.auckland.se281.Main.PolicyType;
 public class InsuranceSystem {
 
   // Create an array list where all clients profiles are stored
-  protected ArrayList<Client> listOfClients = new ArrayList<>();
+  private ArrayList<Client> listOfClients = new ArrayList<>();
 
   private Client loadedProfile;
 
