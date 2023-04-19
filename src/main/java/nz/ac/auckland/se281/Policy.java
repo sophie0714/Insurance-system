@@ -1,6 +1,6 @@
 package nz.ac.auckland.se281;
 
-public abstract class Policy  {
+public abstract class Policy {
 
   // Instance fields
   protected int sumInsured;
