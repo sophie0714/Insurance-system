@@ -20,6 +20,11 @@ public class PolicyCar extends Policy {
     return makeAndModel;
   }
 
+  // Get attribute, licensePlate, in a type PolicyCar outside of this class
+  public String getLicensePlate() {
+    return licensePlate;
+  }
+
   // Calculate the base premium for car
   @Override
   public int getBasePremium(Client aclient) {
