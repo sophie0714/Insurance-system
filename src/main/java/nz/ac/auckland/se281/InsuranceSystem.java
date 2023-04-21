@@ -175,7 +175,7 @@ public class InsuranceSystem {
         // If there is a loaded profile already, unload the loaded profile before laoding a new
         // profile
         if (loadedProfile != null) {
-          unloadProfile();
+          loadedProfile = null;
         }
         MessageCli.PROFILE_LOADED.printMessage(userName);
         loadedProfile = aclient;
