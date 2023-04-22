@@ -242,28 +242,20 @@ public class InsuranceSystem {
 
     switch (type) {
       case HOME:
-        Boolean rental;
-        if (options[2].toLowerCase().contains("y")) {
-          rental = true;
-        } else {
-          rental = false;
-        }
-        // Store home policy for the loaded profile
-        PolicyHome policyHome = new PolicyHome(Integer.valueOf(options[0]), options[1], rental);
+        PolicyHome policyHome =
+            new PolicyHome(
+                Integer.valueOf(options[0]), options[1], options[2].toLowerCase().contains("y"));
         loadedProfile.addPolicy(policyHome);
         MessageCli.NEW_POLICY_CREATED.printMessage("home", loadedProfile.getName());
         break;
 
       case CAR:
-        Boolean breakdown;
-        if (options[3].toLowerCase().contains("y")) {
-          breakdown = true;
-        } else {
-          breakdown = false;
-        }
-        // Store car policy for the loaded profile
         PolicyCar policyCar =
-            new PolicyCar(Integer.valueOf(options[0]), options[1], options[2], breakdown);
+            new PolicyCar(
+                Integer.valueOf(options[0]),
+                options[1],
+                options[2],
+                options[3].toLowerCase().contains("y"));
         loadedProfile.addPolicy(policyCar);
         MessageCli.NEW_POLICY_CREATED.printMessage("car", loadedProfile.getName());
         break;
